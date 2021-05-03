@@ -1,27 +1,22 @@
 import React from 'react'
-import { View, Text, StyleSheet, Image } from 'react-native'
-import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import { View, StyleSheet, FlatList } from 'react-native'
 import ProductItem from '../../components/ProductItem'
+import Products from '../../data/products'
+
 
 const HomeScreen = () => {
     return (
-        <View style= {styles.page}>
-            <ProductItem />
-            <ProductItem />
-            <ProductItem />
-            <ProductItem />
-            <ProductItem />
-            <ProductItem />
-            <ProductItem />
-            <ProductItem />
-            <ProductItem />
-            <ProductItem />
-            <ProductItem />
-            <ProductItem />
-            <ProductItem />
-            <ProductItem />
 
+        <View style= {styles.page}>
+
+            <FlatList
+                data={Products}
+                renderItem={({item})=> <ProductItem item={item} />}
+                showsHorizontalScrollIndicator={false}
+                showsVerticalScrollIndicator={false}
+                 />
         </View>
+
     )
 }
 
