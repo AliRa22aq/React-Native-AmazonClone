@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, ScrollView} from 'react-native';
 import styles from './styles';
 import product from '../../data/product';
 import {Picker} from '@react-native-picker/picker';
@@ -18,11 +18,13 @@ const ProductScreen = () => {
   console.log(selectedOption);
 
   return (
-    <View style={styles.root}>
+    <ScrollView style={styles.root}>
       <Text style={styles.title}>{product.title} </Text>
 
       {/* image carollas */}
       <ImageCarousel images={product.images}/>
+
+
       {/* Optoin selector */}
       <Picker
         selectedValue={selectedOption}
@@ -32,6 +34,7 @@ const ProductScreen = () => {
         ))}
       </Picker>
 
+      {/* Price */}
       <Text style={styles.price}>
         $ {product.price}
         {product.oldPrice && (
@@ -39,6 +42,7 @@ const ProductScreen = () => {
         )}
       </Text>
 
+      {/* Product Description */}
       <Text style={styles.description}>{product.description}</Text>
 
       {/* Quantity selector    */}
@@ -47,7 +51,7 @@ const ProductScreen = () => {
       {/* Buttons */}
       <Button text="Hello" onPress={()=> {console.warn("pressed")}} />
       <Button text="Hello" onPress={()=> {console.warn("pressed")}} />
-    </View>
+    </ScrollView>
   );
 };
 

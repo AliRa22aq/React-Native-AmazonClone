@@ -21,6 +21,7 @@
  import {Colors} from 'react-native/Libraries/NewAppScreen';
 import HomeScreen from './src/screens/HomeScreen';
 import ProductScreen from './src/screens/ProductScreen';
+import ShopingCartScreen from './src/screens/ShopingCartScreen';
 
 
  const App = () => {
@@ -29,9 +30,10 @@ import ProductScreen from './src/screens/ProductScreen';
      <SafeAreaView>
 
          <StatusBar />
-{/* 
-         <HomeScreen /> */}
-         <ProductScreen />
+
+         {/* <HomeScreen /> */}
+         {/* <ProductScreen /> */}
+         <ShopingCartScreen />
 
      </SafeAreaView>
    );

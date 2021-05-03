@@ -1,23 +1,36 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, Image} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import QuantitySelector from '../QuantitySelector';
 import styles from './styles';
 
-interface ProductItemProps {
-  item: {
+interface CartproductItemProps {
+  cartItem: {
     id: string;
-    title: string;
-    image: string;
-    avgRating: number;
-    ratings: number;
-    price: number;
-    oldPrice?: number;
-  };
+    quantity: number;
+    option?: string;    
+    item: {
+      id: string;
+      title: string;
+      image: string;
+      avgRating: number;
+      ratings: number;
+      price: number;
+      oldPrice?: number | undefined;
+    };
+  }
 }
 
-const ProductItem = ({item}: ProductItemProps) => {
+
+const CartproductItem = ({cartItem}: CartproductItemProps) => {
+
+  const {quantity: quantityProp, item} = cartItem
+
+  const [quantity, setquantity] = useState(quantityProp)
+
   return (
-    <View style={styles.root}>
+    <View style={styles.root}> 
+    <View style={styles.row}>
       <Image style={styles.image} source={{uri: item.image}} />
 
       <View style={styles.rightContainer}>
@@ -45,7 +58,12 @@ const ProductItem = ({item}: ProductItemProps) => {
         </Text>
       </View>
     </View>
+    <View style={styles.quantityContainer}>
+    <QuantitySelector quantity={quantity} setQuantity={setquantity} />
+
+    </View>
+    </View>
   );
 };
 
-export default ProductItem;
+export default CartproductItem;

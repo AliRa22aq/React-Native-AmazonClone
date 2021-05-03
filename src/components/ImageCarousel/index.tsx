@@ -8,9 +8,11 @@ const ImageCarousel = ({images}: {images: [string]}) => {
     const windowEidth = useWindowDimensions().width;
 
 
-    const onViewChanged = useRef(({ viewableItems }) => {
+    const onViewChanged = useRef(({ viewableItems}: any ) => {
         // console.log(viewableItems[0].index)
-        setActiveIndex(parseInt(viewableItems[0].index))
+        if (viewableItems.length > 0) {
+            setActiveIndex(parseInt(viewableItems[0].index))
+        }
     }
     )
 
