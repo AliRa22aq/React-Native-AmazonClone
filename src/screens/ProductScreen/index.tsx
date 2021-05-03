@@ -5,6 +5,7 @@ import product from '../../data/product';
 import {Picker} from '@react-native-picker/picker';
 import QuantitySelector from '../../components/QuantitySelector';
 import Button from '../../components/Button/inex';
+import ImageCarousel from '../../components/ImageCarousel';
 
 
 const ProductScreen = () => {
@@ -21,7 +22,7 @@ const ProductScreen = () => {
       <Text style={styles.title}>{product.title} </Text>
 
       {/* image carollas */}
-
+      <ImageCarousel images={product.images}/>
       {/* Optoin selector */}
       <Picker
         selectedValue={selectedOption}
