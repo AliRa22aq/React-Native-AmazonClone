@@ -26,6 +26,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
    Colors,
    ReloadInstructions,
  } from 'react-native/Libraries/NewAppScreen';
+import HomeScreen from './src/screens/HomeScreen';
 
  const Section: React.FC<{
    title: string;
@@ -67,7 +68,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
        <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
        <ScrollView contentInsetAdjustmentBehavior="automatic">
          <View>
-                  <Text> My name is Ali and I am going to be a bisunessman</Text>
+                 <HomeScreen />
          </View>
        </ScrollView>
      </SafeAreaView>
