@@ -1,34 +1,35 @@
 import React, {useState} from 'react';
-import {View, Text, Image} from 'react-native';
+import {View, Text, Image, Pressable} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import QuantitySelector from '../QuantitySelector';
 import styles from './styles';
+import {useNavigation} from '@react-navigation/native'
 
-interface CartProductItemProps {
-  cartItem: {
+interface ProductItemProps {
+  item: {
     id: string;
-    quantity: number;
-    option?: string;
-    item: {
-      id: string;
-      title: string;
-      image: string;
-      avgRating: number;
-      ratings: number;
-      price: number;
-      oldPrice?: number;
-    };
+    title: string;
+    image: string;
+    avgRating: number;
+    ratings: number;
+    price: number;
+    oldPrice?: number;
   };
 }
 
-const CartproductItem = ({cartItem}: CartProductItemProps) => {
+const ProductItem = ({item}: ProductItemProps) => {
 
-  const {quantity: quantityProp, item} = cartItem
+  const navigation = useNavigation();
 
-  const [quantity, setquantity] = useState(quantityProp)
+  const onPress = () => {
+    navigation.navigate('ProductDetails', {id: item.id})
+  }
 
   return (
-    <View style={styles.root}> 
+    <Pressable 
+      style={styles.root}
+      onPress={onPress}
+      > 
     <View style={styles.row}>
       <Image style={styles.image} source={{uri: item.image}} />
 
@@ -57,12 +58,16 @@ const CartproductItem = ({cartItem}: CartProductItemProps) => {
         </Text>
       </View>
     </View>
-    <View style={styles.quantityContainer}>
-    <QuantitySelector quantity={quantity} setQuantity={setquantity} />
 
-    </View>
-    </View>
+    </Pressable>
   );
 };
 
-export default CartproductItem;
+export default ProductItem;
+
+
+
+{/* <View style={styles.quantityContainer}>
+<QuantitySelector quantity={quantity} setQuantity={setquantity} />
+
+</View> */}

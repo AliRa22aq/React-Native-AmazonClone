@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, StyleSheet, FlatList } from 'react-native'
-import ProductItem from '../../components/CartproductItem'
-import Products from '../../data/products'
+import ProductItem from '../../components/ProductItem'
+import products from '../../data/products'
 
 
 const HomeScreen = () => {
@@ -10,13 +10,11 @@ const HomeScreen = () => {
         <View style= {styles.page}>
 
             <FlatList
-                data={Products}
-                renderItem={({item})=> <ProductItem item={item} />}
-                showsHorizontalScrollIndicator={false}
+                data={products}
+                renderItem={({item}) => <ProductItem item={item} />}
                 showsVerticalScrollIndicator={false}
-                 />
+            />
         </View>
-
     )
 }
 
@@ -27,3 +25,8 @@ const styles = StyleSheet.create({
         margin: 10,
     },
 })
+
+
+// Type '{ id: string; title: string; image: string; avgRating: number; ratings: number; price: number; oldPrice: number; }' 
+// is missing the following properties from type
+//      '{ id: string; quantity: number; option?: string | undefined; item: { id: string; title: string; image: string; avgRating: number; ratings: number; price: number; oldPrice?: number | undefined; }; }': quantity, itemts(2322)

@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { View, FlatList, Image, StyleSheet, useWindowDimensions, Text} from 'react-native'
 
-const ImageCarousel = ({images}: {images: [string]}) => {
+const ImageCarousel = ({images}: {images: string[]}) => {
 
     const [activeIndex, setActiveIndex] = useState(3)
 

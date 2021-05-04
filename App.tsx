@@ -12,31 +12,20 @@
  import {
    SafeAreaView,
    StatusBar,
-   Text,
-   useColorScheme,
-   View,
  } from 'react-native';
 
-
- import {Colors} from 'react-native/Libraries/NewAppScreen';
-import AddressScreen from './src/screens/AddressScreen';
-import HomeScreen from './src/screens/HomeScreen';
-import ProductScreen from './src/screens/ProductScreen';
-import ShopingCartScreen from './src/screens/ShopingCartScreen';
+import 'react-native-gesture-handler';
+import Router from './src/Router';
 
 
  const App = () => {
 
-   return (
-     <SafeAreaView>
+  return (
+     <SafeAreaView style={{flex: 1}}>
 
          <StatusBar />
-
-         {/* <HomeScreen /> */}
-         {/* <ProductScreen /> */}
-         {/* <ShopingCartScreen /> */}
-         <AddressScreen />
-
+         <Router />
+     
      </SafeAreaView>
    );
  };

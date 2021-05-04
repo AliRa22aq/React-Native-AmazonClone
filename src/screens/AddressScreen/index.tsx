@@ -94,17 +94,6 @@ const AddressScreen = () => {
         </View>
 
         <View style={styles.row}>
-          <Text style={styles.label}>Phone Number</Text>
-          <TextInput
-            keyboardType="phone-pad"
-            style={styles.input}
-            placeholder="Phone Number"
-            value={phoneNumber}
-            onChangeText={setPhoneNumber}
-          />
-        </View>
-
-        <View style={styles.row}>
           <Text style={styles.label}>Address</Text>
           <TextInput
             style={styles.input}

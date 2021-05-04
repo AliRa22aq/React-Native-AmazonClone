@@ -6,16 +6,21 @@ import {Picker} from '@react-native-picker/picker';
 import QuantitySelector from '../../components/QuantitySelector';
 import Button from '../../components/Button/inex';
 import ImageCarousel from '../../components/ImageCarousel';
+import {useRoute} from '@react-navigation/native'
 
 
 const ProductScreen = () => {
+
+  const route = useRoute()
+  console.log(route.params)
+
   const [selectedOption, setSelectedOption] = useState(
     product.options ? product.options[0] : null,
   );
 
   const [quantity, setQuantity] = useState(0)
 
-  console.log(selectedOption);
+  // console.log(selectedOption);
 
   return (
     <ScrollView style={styles.root}>
@@ -49,8 +54,8 @@ const ProductScreen = () => {
       <QuantitySelector  quantity={quantity} setQuantity={setQuantity} />
 
       {/* Buttons */}
-      <Button text="Hello" onPress={()=> {console.warn("pressed")}} />
-      <Button text="Hello" onPress={()=> {console.warn("pressed")}} />
+      <Button text="Add to cart" onPress={()=> {console.warn("pressed")}} />
+      <Button text="Go to cart" onPress={()=> {console.warn("pressed")}} />
     </ScrollView>
   );
 };
