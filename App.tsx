@@ -19,6 +19,7 @@
 
 
  import {Colors} from 'react-native/Libraries/NewAppScreen';
+import AddressScreen from './src/screens/AddressScreen';
 import HomeScreen from './src/screens/HomeScreen';
 import ProductScreen from './src/screens/ProductScreen';
 import ShopingCartScreen from './src/screens/ShopingCartScreen';
@@ -33,7 +34,8 @@ import ShopingCartScreen from './src/screens/ShopingCartScreen';
 
          {/* <HomeScreen /> */}
          {/* <ProductScreen /> */}
-         <ShopingCartScreen />
+         {/* <ShopingCartScreen /> */}
+         <AddressScreen />
 
      </SafeAreaView>
    );

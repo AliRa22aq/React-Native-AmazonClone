@@ -1170,6 +1170,11 @@
   dependencies:
     "@babel/types" "^7.3.0"
 
+"@types/country-list@^2.1.0":
+  "integrity" "sha512-aCE6SP9WQJkq9kNFDRdxpUfWhazvreNSPtm1BQG1B4/xSpKbRwfweVAChYx6MMLyTguCKJExGZ1C52Z8DlFSGg=="
+  "resolved" "https://registry.npmjs.org/@types/country-list/-/country-list-2.1.0.tgz"
+  "version" "2.1.0"
+
 "@types/eslint-visitor-keys@^1.0.0":
   "integrity" "sha512-OCutwjDZ4aFS6PB1UZ988C4YgwlBHJd6wCeQqaLdmadZ/7e+w79+hbMUFC1QXDNCmdyoRfAFdm0RypzwR+Qpag=="
   "resolved" "https://registry.npmjs.org/@types/eslint-visitor-keys/-/eslint-visitor-keys-1.0.0.tgz"
@@ -1966,6 +1971,11 @@
   "resolved" "https://registry.npmjs.org/caseless/-/caseless-0.12.0.tgz"
   "version" "0.12.0"
 
+"cclist@^1.1.0":
+  "integrity" "sha512-KiWQSapvKAfLPTaL7KDVM51TGAc6Rc3UDHWozjIXp3GNvPupUwQMlmoqZepxTmX84hYIzcodrgDCzXomIM6fRw=="
+  "resolved" "https://registry.npmjs.org/cclist/-/cclist-1.1.0.tgz"
+  "version" "1.1.0"
+
 "chalk@^2.0.0":
   "integrity" "sha512-Mti+f9lpJNcwF4tWV8/OrTTtF1gZi+f8FqlyAdouralcFWFQWF2+NgCHShjkCb+IFBLq9buZwE1xckQU4peSuQ=="
   "resolved" "https://registry.npmjs.org/chalk/-/chalk-2.4.2.tgz"
@@ -2231,6 +2241,11 @@
     "is-directory" "^0.3.1"
     "js-yaml" "^3.13.1"
     "parse-json" "^4.0.0"
+
+"country-list@^2.2.0":
+  "integrity" "sha512-AS21pllCp72LmUztqXPVKXK3TRyap1XlohGLqN04cXH2rFB9vo7SnH5sMnqltZPnu9ie/x1se3UuCZJbGXErfw=="
+  "resolved" "https://registry.npmjs.org/country-list/-/country-list-2.2.0.tgz"
+  "version" "2.2.0"
 
 "cross-spawn@^6.0.0":
   "integrity" "sha512-eTVLrBSt7fjbDygz805pMnstIs2VTBNkRm0qxZd+M7A5XDdxVRWO5MxGBXZhjY4cqLYLdtrGqRf8mBPmzwSpWQ=="
