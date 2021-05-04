@@ -10,15 +10,15 @@ import AddressScreen from '../screens/AddressScreen';
 
 const Stack = createStackNavigator();
 
-const ShopingCartStack = () => {
+const HomeStack = () => {
 
   return (
       <Stack.Navigator>
-        <Stack.Screen name="Cart" component={ShopingCartScreen} options={{title: "Shoping Cart"}} />
-        <Stack.Screen name="Address" component={AddressScreen} options={{title: "Address"}}/>
+        <Stack.Screen name="HomeScreen" component={HomeScreen} options={{title: "Home"}} />
+        <Stack.Screen name="ProductDetails" component={ProductScreen} />
       </Stack.Navigator>
 
   );
 };
 
-export default ShopingCartStack;
+export default HomeStack;

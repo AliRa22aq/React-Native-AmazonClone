@@ -3,16 +3,16 @@ import {View, Text} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import HomeScreen from '../screens/HomeScreen';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import ShopingCartScreen from '../screens/ShopingCartScreen';
 import Entypo from 'react-native-vector-icons/Entypo'
 import ProductScreen from '../screens/ProductScreen';
-// import ShopingCartScreen from '../screens/ShopingCartScreen';
 import AddressScreen from '../screens/AddressScreen';
 import HomeStack from './HomeStack';
-import ShopingCartStack from './HomeStack';
+import ShopingCartStack from './ShopingCartStack';
 
-const BottomTabNav = () => {
-  const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator();
+
+
+const BottomTabNav = () => {  
 
   return (
       <Tab.Navigator 
@@ -29,6 +29,7 @@ const BottomTabNav = () => {
                 tabBarIcon: ({color}) => <Entypo  name='home' color={color} size={25} /> 
             }}/>
 
+
         <Tab.Screen 
             name="profile" 
             component={ProductScreen}
@@ -37,7 +38,7 @@ const BottomTabNav = () => {
             }}/>
 
         <Tab.Screen 
-            name="ShoppingCart" 
+            name="ShopingCartStack" 
             component={ShopingCartStack}
             options = {{
                 tabBarIcon: ({color}) => <Entypo  name='shopping-cart' color={color} size={25} /> 
