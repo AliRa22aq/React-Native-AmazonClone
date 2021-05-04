@@ -1,20 +1,21 @@
-import React from 'react';
-import {View, Text} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
+import React, {useState} from 'react';
 import HomeScreen from '../screens/HomeScreen';
 import {createStackNavigator} from '@react-navigation/stack';
-import BottomTabNav from './BottomTabNav';
 import ProductScreen from '../screens/ProductScreen';
-import ShopingCartScreen from '../screens/ShopingCartScreen';
-import AddressScreen from '../screens/AddressScreen';
+import HeaderInput from '../components/HeaderInput';
 
 const Stack = createStackNavigator();
 
 const HomeStack = () => {
-
+    const [searchValue, setSearchValue] = useState<string>('')
   return (
-      <Stack.Navigator>
-        <Stack.Screen name="HomeScreen" component={HomeScreen} options={{title: "Home"}} />
+      <Stack.Navigator 
+        screenOptions={{
+            header: () => <HeaderInput searchValue={searchValue} setSearchValue={setSearchValue}/> 
+      }}>
+        <Stack.Screen name="HomeScreen" options={{title: "Home"}}>
+           {()=>  <HomeScreen searchValue={searchValue}/>}
+        </Stack.Screen>
         <Stack.Screen name="ProductDetails" component={ProductScreen} />
       </Stack.Navigator>
 

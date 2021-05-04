@@ -17,7 +17,7 @@ const BottomTabNav = () => {
   return (
       <Tab.Navigator 
         tabBarOptions={{
-            showLabel: false, 
+            showLabel: false,
             inactiveTintColor: "#ffbd7d",
             activeTintColor: "#e47911",
             }}>
