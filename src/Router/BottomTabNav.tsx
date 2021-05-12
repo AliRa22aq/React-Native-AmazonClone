@@ -8,6 +8,7 @@ import ProductScreen from '../screens/ProductScreen';
 import AddressScreen from '../screens/AddressScreen';
 import HomeStack from './HomeStack';
 import ShopingCartStack from './ShopingCartStack';
+import MenuScreen from '../screens/MenuScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -46,7 +47,7 @@ const BottomTabNav = () => {
 
         <Tab.Screen 
             name="more" 
-            component={AddressScreen}
+            component={MenuScreen}
             options = {{
                 tabBarIcon: ({color}) => <Entypo  name='menu' color={color} size={25} /> 
             }}/>

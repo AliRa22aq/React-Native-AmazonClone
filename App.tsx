@@ -16,6 +16,12 @@
 
 import 'react-native-gesture-handler';
 import Router from './src/Router';
+import { withAuthenticator } from 'aws-amplify-react-native'
+
+
+import Amplify from 'aws-amplify'
+import config from './aws-exports'
+Amplify.configure(config)
 
 
  const App = () => {
@@ -31,4 +37,4 @@ import Router from './src/Router';
  };
 
 
- export default App;
+ export default withAuthenticator(App)
