@@ -1,4 +1,4 @@
-type Product @model {
+type Product @model @auth(rules: [{ allow: public }]) {
   id: ID!
   title: String!
   description: String
@@ -14,7 +14,7 @@ type Product @model {
 
 }
 
-type CartProduct @model @auth(rules: [{ allow: public }]){
+type CartProduct @model @auth(rules: [{ allow: public }]) {
   id: ID!
   userSub: String!
   quantity: Int!

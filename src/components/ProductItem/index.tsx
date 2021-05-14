@@ -4,6 +4,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import QuantitySelector from '../QuantitySelector';
 import styles from './styles';
 import {useNavigation} from '@react-navigation/native'
+import {Product} from '../../models';
 
 interface ProductItemProps {
   item: {
@@ -48,12 +49,12 @@ const ProductItem = ({item}: ProductItemProps) => {
             />
           ))}
 
-          <Text>{item.ratings}</Text>
+          <Text>{item.ratings.toFixed(2)}</Text>
         </View>
         <Text style={styles.price}>
           $ {item.price}
           {item.oldPrice && (
-            <Text style={styles.oldPrice}> ${item.oldPrice} </Text>
+            <Text style={styles.oldPrice}> ${item.oldPrice.toFixed(2)} </Text>
           )}
         </Text>
       </View>

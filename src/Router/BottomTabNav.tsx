@@ -39,7 +39,7 @@ const BottomTabNav = () => {
             }}/>
 
         <Tab.Screen 
-            name="ShopingCartStack" 
+            name="ShopingCart" 
             component={ShopingCartStack}
             options = {{
                 tabBarIcon: ({color}) => <Entypo  name='shopping-cart' color={color} size={25} /> 
