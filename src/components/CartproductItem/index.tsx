@@ -18,13 +18,7 @@ const CartproductItem = ({cartItem}: CartProductItemProps) => {
   // const [quantity, setquantity] = useState(quantityProp)
   const updateQuantity = async(newQuantity: number)=> {
 
-    // await DataStore.save(
-    //   CartProduct.copyOf(cartItem, updated => {
-    //     updated.quantity = newQuantity;
-    //   })
-    // );
-
-    const original = await DataStore.query(CartProduct, cartItem.id );
+  const original = await DataStore.query(CartProduct, cartItem.id );
 
 await DataStore.save(
   CartProduct.copyOf(original, updated => {

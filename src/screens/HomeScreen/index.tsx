@@ -3,7 +3,7 @@ import { View, StyleSheet, FlatList } from 'react-native'
 import ProductItem from '../../components/ProductItem'
 // import products from '../../data/products'
 import {DataStore} from 'aws-amplify';
-import {Product} from '../../models';
+import {Product} from '../../../models';
 
 const HomeScreen = ({searchValue}: {searchValue: string}) => {
     // console.log(searchValue)

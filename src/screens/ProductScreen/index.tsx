@@ -7,7 +7,7 @@ import Button from '../../components/Button/inex';
 import ImageCarousel from '../../components/ImageCarousel';
 import {useRoute} from '@react-navigation/native';
 import {DataStore, Auth} from 'aws-amplify';
-import {Product, CartProduct} from '../../models';
+import {Product, CartProduct} from '../../../models';
 import {useNavigation} from '@react-navigation/native'
 
 const ProductScreen = () => {
@@ -16,8 +16,6 @@ const ProductScreen = () => {
   const navigation = useNavigation()
   const [product, setProduct] = useState<Product | undefined>(undefined);
   const [quantity, setQuantity] = useState(1);
-
-
 
   useEffect(() => {
     if (!route.params?.id) {
@@ -43,7 +41,6 @@ const ProductScreen = () => {
       return;
     }
     console.warn("trying")
-
     
     const newCartProduct = new CartProduct({
       userSub : userInfo.attributes.sub,

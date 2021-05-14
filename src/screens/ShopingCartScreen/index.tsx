@@ -15,7 +15,7 @@ import CartproductItem from '../../components/CartproductItem';
 // import products from '../../data/products'
 import {useNavigation} from '@react-navigation/native';
 import {DataStore, Auth} from 'aws-amplify';
-import {Product, CartProduct} from '../../models';
+import {Product, CartProduct} from '../../../models';
 
 const ShopingCartScreen = () => {
   const navigation = useNavigation();
@@ -24,16 +24,19 @@ const ShopingCartScreen = () => {
   console.log('cartProducts');
   console.log(cartProducts);
 
-  useEffect(() => {
-    const fetchCartProduct = async () => {
-      const userData = await Auth.currentAuthenticatedUser();
+  const fetchCartProduct = async () => {
+    const userData = await Auth.currentAuthenticatedUser();
 
-      DataStore.query(CartProduct, cp =>
-        cp.userSub('eq', userData.attributes.sub),
-      ).then(setCartProducts);
-    };
+    DataStore.query(CartProduct, cp =>
+      cp.userSub('eq', userData.attributes.sub),
+    ).then(setCartProducts);
+  };
+
+
+  useEffect(() => {
     fetchCartProduct();
   }, []);
+
 
   useEffect(() => {
     if (cartProducts.filter(cp => !cp.product).length === 0) {
@@ -56,6 +59,11 @@ const ShopingCartScreen = () => {
     fetchtProduct();
   }, [cartProducts]);
 
+
+  useEffect(()=> {
+    const subscription = DataStore.observe(CartProduct).subscribe(msg => fetchCartProduct())
+    return subscription.unsubscribe;
+  }, [])
 
   //updating cart products
   useEffect(()=> {
