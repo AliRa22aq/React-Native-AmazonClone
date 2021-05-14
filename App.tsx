@@ -8,7 +8,7 @@
  * @format
  */
 
- import React from 'react';
+ import React, { Component, useEffect } from 'react';
  import {
    SafeAreaView,
    StatusBar,
@@ -16,8 +16,8 @@
 
 import 'react-native-gesture-handler';
 import Router from './src/Router';
+import SplashScreen from 'react-native-splash-screen';
 import { withAuthenticator } from 'aws-amplify-react-native'
-
 
 import Amplify from 'aws-amplify'
 import config from './aws-exports'
@@ -38,3 +38,6 @@ Amplify.configure(config)
 
 
  export default withAuthenticator(App)
+
+ SplashScreen.hide()
+
