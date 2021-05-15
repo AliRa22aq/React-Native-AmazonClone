@@ -23,10 +23,29 @@
           "additionalAuthenticationProviders": []
         }
       }
+    },
+    "Stripewebhook": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "Stripewebhook",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ]
     }
   },
   "function": {
     "CreatePaymentIntent": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "Stripewebhook": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
