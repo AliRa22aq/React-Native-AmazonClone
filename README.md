@@ -1,11 +1,22 @@
 # Ecommerece-App (Amazon clone)
 
-Features: <br />
+Front End: <br />
 <od>
-  <li>A </li>
-  <li>A </li>
-  <li>A </li>
+  <li>Splash Screen </li>
+  <li>aws Authentication </li>
+  <li>Bottom Tab for navigation </li>
+  <li>Drawer Tab for navigation </li>
 </od>
+Back End: <br />
+<od>
+  <li>aws Amplify </li>
+  <li>aws Lamba functions </li>
+  <li>aws DataStore </li>
+  <li>Drawer Tab for navigation </li>
+  <li>DataStore </li>
+</od>
+
+
 Screen Overreview:
 <div>
 <img src="./Images/1.jpg" alt="Image6" width="180"/>
