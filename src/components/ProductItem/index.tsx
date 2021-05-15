@@ -7,15 +7,7 @@ import {useNavigation} from '@react-navigation/native'
 import {Product} from '../../models';
 
 interface ProductItemProps {
-  item: {
-    id: string;
-    title: string;
-    image: string;
-    avgRating: number;
-    ratings: number;
-    price: number;
-    oldPrice?: number;
-  };
+  item: Product
 }
 
 const ProductItem = ({item}: ProductItemProps) => {

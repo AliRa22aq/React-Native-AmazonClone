@@ -1,5 +1,5 @@
 import {Picker} from '@react-native-picker/picker';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -12,61 +12,114 @@ import {
 import styles from './styles';
 import countryList from 'country-list';
 import Button from '../../components/Button/inex';
-import {DataStore, Auth} from 'aws-amplify';
-import {  CartProduct, OrderProduct, Order } from '../../../models';
-import {useNavigation} from '@react-navigation/native'
+import {DataStore, Auth, API, graphqlOperation} from 'aws-amplify';
+import {CartProduct, OrderProduct, Order} from '../../../models';
+import {useNavigation, useRoute} from '@react-navigation/native';
+import {createPaymentIntent} from '../../graphql/mutations';
+import {useStripe, presentPaymentSheet} from '@stripe/stripe-react-native';
 
 const AddressScreen = () => {
   const countries = countryList.getData();
 
-  const navigation = useNavigation()
+  const navigation = useNavigation();
+  const route = useRoute();
+  const amount = route.params?.totalPrice || 0;
+  const {initPaymentSheet} = useStripe();
 
   const [country, setCountry] = useState(countries[1].code);
   const [fullName, setFullName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [address, setAddress] = useState('');
   const [city, setCity] = useState('');
+  const [clientSecret, setClientSecret] = useState<string>();
 
-const saveOrder = async() => {
-  // create a new order
-  const userData = await Auth.currentAuthenticatedUser()
+  useEffect(() => {
+    fetchPaymentIntent();
+  }, []);
 
-  const newOrder = await DataStore.save(
-    new Order({
-      userSub: userData.attributes.sub,
-      fullName: fullName,
-      phoneNumber: phoneNumber,
-      country: country,
-      city: city,
-      address: address
-    })
-  );
+  useEffect(() => {
+    if (clientSecret) {
+      initializePaymentSheet();
+    }
+  }, [clientSecret]);
 
-  // fetch all cart items
-  const cartItems = await DataStore.query(CartProduct, cp =>
-    cp.userSub('eq', userData.attributes.sub),
-  )
+  const fetchPaymentIntent = async () => {
+    const response = await API.graphql(
+      graphqlOperation(createPaymentIntent, {
+        amount,
+      }),
+    );
+    console.log('response');
+    setClientSecret(response.data.createPaymentIntent.clientSecret);
+  };
 
-  // attach all cart items to new order
-  await Promise.all(
-    cartItems.map(cartItem => DataStore.save(
-      new OrderProduct({
-        quantity: cartItem.quantity,
-        option: cartItem.option,
-        productID: cartItem.productID,
-        orderID: newOrder.id,
-      })
-    ))
-  )
+  const initializePaymentSheet = async () => {
+    if (!clientSecret) {
+      return;
+    }
+    const {error} = await initPaymentSheet({
+      paymentIntentClientSecret: clientSecret,
+    });
+    console.log('sucess');
+    if (error) {
+      Alert.alert(error.message);
+    }
+  };
 
-  // Delete all cart items to new order
-  await Promise.all(
-    cartItems.map(cartItem => DataStore.delete(cartItem))
-  )
+  const openPaymentSheet = async () => {
+    if (!clientSecret) {
+      return;
+    }
+    const {error} = await presentPaymentSheet({clientSecret});
 
-  navigation.navigate("home")
+    if (error) {
+      Alert.alert(`Error code: ${error.code}`, error.message);
+    } else {
+      Alert.alert('Success', 'Your Payment is confirmed!');
+      saveOrder();
+    }
 
-}
+  };
+
+  const saveOrder = async () => {
+    // create a new order
+    const userData = await Auth.currentAuthenticatedUser();
+
+    const newOrder = await DataStore.save(
+      new Order({
+        userSub: userData.attributes.sub,
+        fullName: fullName,
+        phoneNumber: phoneNumber,
+        country: country,
+        city: city,
+        address: address,
+      }),
+    );
+
+    // fetch all cart items
+    const cartItems = await DataStore.query(CartProduct, cp =>
+      cp.userSub('eq', userData.attributes.sub),
+    );
+
+    // attach all cart items to new order
+    await Promise.all(
+      cartItems.map(cartItem =>
+        DataStore.save(
+          new OrderProduct({
+            quantity: cartItem.quantity,
+            option: cartItem.option,
+            productID: cartItem.productID,
+            orderID: newOrder.id,
+          }),
+        ),
+      ),
+    );
+
+    // Delete all cart items to new order
+    await Promise.all(cartItems.map(cartItem => DataStore.delete(cartItem)));
+
+    navigation.navigate('home');
+  };
 
   const onCheckout = () => {
     if (!fullName) {
@@ -76,15 +129,17 @@ const saveOrder = async() => {
       Alert.alert('Please fill in Phone Number');
     }
 
-    saveOrder()
-    console.log('Success Checkout');
+    // handle payments
+    openPaymentSheet()
+
+    // saveOrder();
+    // console.warn('Success Checkout');
   };
 
   return (
     <KeyboardAvoidingView
-    //   behavior={Platform.OS == 'android' ? 'padding' : 'height'}
-      keyboardVerticalOffset={Platform.OS == 'android' ? 10 : 0}
-    >
+      //   behavior={Platform.OS == 'android' ? 'padding' : 'height'}
+      keyboardVerticalOffset={Platform.OS == 'android' ? 10 : 0}>
       <ScrollView style={styles.root}>
         <View style={[styles.row, styles.country]}>
           <Picker selectedValue={country} onValueChange={setCountry}>
@@ -138,7 +193,6 @@ const saveOrder = async() => {
             onChangeText={setCity}
           />
         </View>
-
 
         <Button text="Check Out" onPress={onCheckout} />
       </ScrollView>

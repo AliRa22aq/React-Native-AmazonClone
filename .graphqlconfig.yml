@@ -1,6 +1,6 @@
 projects:
   amazonclone:
-    schemaPath: 'G:/PIAIC/Bootcamp2020/React-Native/AmazonClone/graphql/schema.json'
+    schemaPath: amplify/backend/api/amazonclone/build/schema.graphql
     includes:
       - src/graphql/**/*.ts
     excludes:

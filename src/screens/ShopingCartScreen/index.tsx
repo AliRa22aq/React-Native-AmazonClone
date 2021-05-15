@@ -16,13 +16,14 @@ import CartproductItem from '../../components/CartproductItem';
 import {useNavigation} from '@react-navigation/native';
 import {DataStore, Auth} from 'aws-amplify';
 import {Product, CartProduct} from '../../../models';
+import EmptyCart from '../../components/EmptyCart';
 
 const ShopingCartScreen = () => {
   const navigation = useNavigation();
   const [cartProducts, setCartProducts] = useState<CartProduct[]>([]);
 
-  console.log('cartProducts');
-  console.log(cartProducts);
+  // console.log('cartProducts');
+  // console.log(cartProducts);
 
   const fetchCartProduct = async () => {
     const userData = await Auth.currentAuthenticatedUser();
@@ -93,55 +94,26 @@ const ShopingCartScreen = () => {
   },[])
 
 
-  // useEffect(() => {
-  //   const subscriptions = cartProducts.map(cp => {
-  //     DataStore.observe(CartProduct, cp.id).subscribe(msg => {
-  //       if(msg.opType === "UPDATE"){
-  //         setCartProducts(curCarProducts => 
-  //           curCarProducts.map(cp => {
-  //             if(cp.id !== msg.element.id){
-  //               return cp;
-  //             }
-  //             return{
-  //               ...cp,
-  //               ...msg.element
-  //             }
-  //           }
-  //             )
-  //         )
-  //       }})
-
-  //   })
-  //   return ()=> subscriptions.forEach(sub => sub.unsubscribe());
-
-  // },[])
-
-  const checkOut = () => {
-    navigation.navigate('Address');
-  };
-
+  
   const totalPrice = cartProducts.reduce(
     (summedPrices, cartProduct) =>
-      summedPrices + (cartProduct?.product?.price || 0) * cartProduct.quantity,
+    summedPrices + (cartProduct?.product?.price || 0) * cartProduct.quantity,
     0,
-  );
-
-  // console.log(cartProducts)
-  const [refreshing, setRefreshing] = useState(false);
-  const wait = (timeout: number) => {
-    return new Promise(resolve => setTimeout(resolve, timeout));
-  }
-  const onRefresh = React.useCallback(() => {
-    setRefreshing(true);
-    wait(2000).then(() => setRefreshing(false));
-  }, []);
+    );
+    
+    const checkOut = () => {
+      navigation.navigate('Address', {totalPrice});
+    };
 
   if (cartProducts.filter(cp => !cp.product).length !== 0) {
     return <ActivityIndicator />;
   }
+
+  if(cartProducts.length === 0){
+    return <EmptyCart />
+  }
   return (
     <View style={styles.page}>
-      <RefreshControl refreshing={refreshing} onRefresh={onRefresh}>
       <FlatList
         data={cartProducts}
         renderItem={({item}) => <CartproductItem cartItem={item} />}
@@ -167,7 +139,6 @@ const ShopingCartScreen = () => {
           );
         }}
       />
-      </RefreshControl>
     </View>
   );
 };
