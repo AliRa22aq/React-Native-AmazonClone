@@ -1,5 +1,11 @@
 # Ecommerece-App (Amazon clone)
 
+Features: <br />
+<od>
+  <li>A </li>
+  <li>A </li>
+  <li>A </li>
+</od>
 Screen Overreview:
 <div>
 <img src="./Images/1.jpg" alt="Image6" width="180"/>
